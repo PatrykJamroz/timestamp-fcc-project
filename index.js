@@ -27,17 +27,17 @@ app.get("/api/hello", function (req, res) {
 });
 
 const convertDate = (date) => {
-  if (moment(date, "YYYY-MM-DD", true).isValid()) {
-    return {
-      unix: Number(Date.parse(date)),
-      utc: new Date(date).toUTCString(),
-    };
-  }
-
   if (moment(date, "X", true).isValid()) {
     return {
       unix: Number(date),
       utc: new Date(Number(date)).toUTCString(),
+    };
+  }
+
+  if (moment(date).isValid()) {
+    return {
+      unix: Number(Date.parse(date)),
+      utc: new Date(date).toUTCString(),
     };
   }
 
