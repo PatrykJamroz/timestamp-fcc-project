@@ -29,14 +29,14 @@ app.get("/api/hello", function (req, res) {
 const convertDate = (date) => {
   if (moment(date, "YYYY-MM-DD", true).isValid()) {
     return {
-      unix: Date.parse(date),
+      unix: Number(Date.parse(date)),
       utc: new Date(date).toUTCString(),
     };
   }
 
   if (moment(date, "X", true).isValid()) {
     return {
-      unix: date,
+      unix: Number(date),
       utc: new Date(Number(date)).toUTCString(),
     };
   }
@@ -50,7 +50,7 @@ app.get("/api/:date", (req, res) => {
 
 app.get("/api", (req, res) => {
   const dateToday = {
-    unix: Date.parse(new Date()),
+    unix: Number(Date.parse(new Date())),
     utc: new Date().toUTCString(),
   };
   res.json(dateToday);
